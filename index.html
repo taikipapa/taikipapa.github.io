@@ -1,15 +1,114 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>サクッとTodo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>taikipapa — 開発者ページ</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Meiryo", sans-serif;
+      background: #f7f7f5;
+      color: #1a1a1a;
+      line-height: 1.7;
+      padding: 32px 16px 64px;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 48px 0 40px;
+      border-bottom: 1px solid #e0e0dc;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    section h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #d0e8d8;
+    }
+
+    .app-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .app-card {
+      display: block;
+      background: #fff;
+      border: 1px solid #e0e0dc;
+      border-radius: 10px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s;
+    }
+
+    .app-card:hover {
+      border-color: #2e7d50;
+    }
+
+    .app-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2e7d50;
+      margin-bottom: 4px;
+    }
+
+    .app-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    footer {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid #e0e0dc;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-<h1>サクッとTodo</h1>
-<p>シンプルなTodo管理アプリです。</p>
-<ul>
-<li><a href="/app-ads.txt">app-ads.txt</a></li>
-<li><a href="/sakutto-todo/privacy-policy.html">プライバシーポリシー</a></li>
-</ul>
+  <div class="container">
+    <header>
+      <h1>taikipapa</h1>
+      <p>スマートフォンアプリの開発者ページです。</p>
+    </header>
+
+    <section>
+      <h2>アプリ一覧</h2>
+      <div class="app-list">
+        <a class="app-card" href="/okusuri-nondakke/">
+          <h3>お薬飲んだっけ？</h3>
+          <p>毎日のお薬を、かんたんに確認できるアプリです。</p>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 taikipapa. All rights reserved.</p>
+    </footer>
+  </div>
 </body>
 </html>

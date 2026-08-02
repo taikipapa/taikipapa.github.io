@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ズボラ家計簿 | 金額を入れて「入れる」「出す」だけの家計簿</title>
+<meta name="description" content="ズボラ家計簿は、細かい分類やメモ入力なしで、金額を入力して「入れる」「出す」を押すだけで記録できるシンプルな家計簿アプリです。">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5faff;
+    --card-bg: #ffffff;
+    --text: #16202b;
+    --sub-text: #4a5a6a;
+    --accent: #2f8fd6;
+    --accent-dark: #1c6fae;
+    --border: #dde8f2;
+    --pill-bg: #e6f4fe;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #10151b;
+      --card-bg: #181f27;
+      --text: #eaf1f8;
+      --sub-text: #a7b6c4;
+      --accent: #6cb6ec;
+      --accent-dark: #8ecdf7;
+      --border: #2a343f;
+      --pill-bg: #1d2a35;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+  header.hero {
+    padding: 56px 0 32px;
+    text-align: center;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--pill-bg);
+    color: var(--accent-dark);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+    letter-spacing: 0.02em;
+  }
+  h1 {
+    font-size: clamp(28px, 7vw, 40px);
+    margin: 0 0 12px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .tagline {
+    font-size: clamp(16px, 4vw, 19px);
+    color: var(--sub-text);
+    margin: 0 auto;
+    max-width: 480px;
+  }
+  .keyboard-demo {
+    margin: 36px auto 0;
+    max-width: 320px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(20, 40, 60, 0.06);
+  }
+  .demo-balance {
+    text-align: center;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--border);
+    margin-bottom: 14px;
+  }
+  .demo-balance .label { font-size: 12px; color: var(--sub-text); }
+  .demo-balance .amount { font-size: 28px; font-weight: 800; }
+  .demo-buttons { display: flex; gap: 10px; margin-bottom: 14px; }
+  .demo-buttons span {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .demo-buttons .in { background: var(--pill-bg); color: var(--accent-dark); }
+  .demo-buttons .out { background: var(--pill-bg); color: var(--accent-dark); }
+  .demo-keys {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .demo-keys span {
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  section {
+    margin-top: 48px;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 0 18px;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 480px) {
+    .features { grid-template-columns: 1fr; }
+  }
+  .feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 18px 20px;
+  }
+  .feature-card .icon-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: var(--pill-bg);
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .feature-card h3 {
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+  .feature-card p {
+    font-size: 14px;
+    color: var(--sub-text);
+    margin: 0;
+  }
+  .steps {
+    counter-reset: step;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 20px 44px;
+    border-left: 2px solid var(--border);
+    margin-left: 14px;
+  }
+  .steps li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: -15px;
+    top: -2px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .steps strong { display: block; margin-bottom: 2px; }
+  .steps span { color: var(--sub-text); font-size: 14px; }
+  .privacy-note {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    font-size: 14px;
+    color: var(--sub-text);
+  }
+  .privacy-note a { color: var(--accent-dark); font-weight: 600; }
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--sub-text);
+    text-align: center;
+  }
+  footer nav {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  footer nav a {
+    color: var(--accent-dark);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="badge">iPhone / Android 対応</span>
+    <h1>ズボラ家計簿</h1>
+    <p class="tagline">金額を入れて「入れる」か「出す」を押すだけ。分類もメモも要らない、続けられる家計簿です。</p>
+
+    <div class="keyboard-demo" aria-hidden="true">
+      <div class="demo-balance">
+        <div class="label">現在残高</div>
+        <div class="amount">32,500円</div>
+      </div>
+      <div class="demo-buttons">
+        <span class="in">入れる</span>
+        <span class="out">出す</span>
+      </div>
+      <div class="demo-keys">
+        <span>1</span><span>2</span><span>3</span>
+        <span>4</span><span>5</span><span>6</span>
+        <span>7</span><span>8</span><span>9</span>
+        <span>00</span><span>0</span><span>⌫</span>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h2>特徴</h2>
+    <div class="features">
+      <div class="feature-card">
+        <span class="icon-label">シンプル</span>
+        <h3>金額を入れるだけ</h3>
+        <p>専用の数字キーボードで金額を入力し、「入れる」「出す」を押すだけ。カテゴリーやメモの入力は必要ありません。</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon-label">複数財布</span>
+        <h3>目的別に財布を管理</h3>
+        <p>生活費、食費、おこづかい、旅行、貯金など、目的ごとに財布を分けて管理できます。左右スワイプで切り替え可能です。</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon-label">集計</span>
+        <h3>月別・年別に自動集計</h3>
+        <p>財布ごとの月間カレンダーと年間一覧で、入金・出金・合計を自動で確認できます。</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon-label">修正も簡単</span>
+        <h3>履歴の編集・削除</h3>
+        <p>登録した履歴はあとから金額・種別・日時を編集したり削除したりでき、残高と集計に即座に反映されます。</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon-label">安心設計</span>
+        <h3>ログイン不要・端末内保存</h3>
+        <p>アカウント登録やログインは不要です。データは端末内に保存され、クラウド同期は行いません。</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon-label">操作性</span>
+        <h3>片手でサクッと記録</h3>
+        <p>アプリを開いてすぐに入力できる画面構成で、日々の家計管理を数秒で終えられます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>使い方</h2>
+    <ol class="steps">
+      <li>
+        <strong>財布を選ぶ</strong>
+        <span>画面上部の財布一覧からタップ、または左右スワイプで切り替えます。</span>
+      </li>
+      <li>
+        <strong>金額を入力する</strong>
+        <span>画面下部の専用キーボードで金額を入力します。</span>
+      </li>
+      <li>
+        <strong>「入れる」または「出す」を押す</strong>
+        <span>確認画面なしですぐに記録され、残高が即時更新されます。</span>
+      </li>
+      <li>
+        <strong>財布名や残高をタップして詳細を確認</strong>
+        <span>月表示・年表示・履歴一覧で、収支をあとから確認・修正できます。</span>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>広告について</h2>
+    <div class="privacy-note">
+      本アプリは無料でご利用いただけ、運営維持のため Google AdMob による広告を表示します。広告の表示には端末の広告識別子（IDFA / 広告ID）を利用する場合があり、iOS では App Tracking Transparency の許可確認を行います。詳しくは<a href="privacy/">プライバシーポリシー</a>をご覧ください。
+    </div>
+  </section>
+
+  <footer>
+    <nav>
+      <a href="./">ホーム</a>
+      <a href="support/">サポート</a>
+      <a href="privacy/">プライバシーポリシー</a>
+    </nav>
+    <p>ズボラ家計簿</p>
+  </footer>
+
+</div>
+</body>
+</html>

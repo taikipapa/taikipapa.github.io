@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サポート | ズボラ家計簿</title>
+<meta name="description" content="ズボラ家計簿のサポートページです。お問い合わせ先、よくある質問、不具合報告の際に必要な情報をご案内します。">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5faff;
+    --card-bg: #ffffff;
+    --text: #16202b;
+    --sub-text: #4a5a6a;
+    --accent: #2f8fd6;
+    --accent-dark: #1c6fae;
+    --border: #dde8f2;
+    --pill-bg: #e6f4fe;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #10151b;
+      --card-bg: #181f27;
+      --text: #eaf1f8;
+      --sub-text: #a7b6c4;
+      --accent: #6cb6ec;
+      --accent-dark: #8ecdf7;
+      --border: #2a343f;
+      --pill-bg: #1d2a35;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+  header.page-head {
+    padding: 44px 0 24px;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--pill-bg);
+    color: var(--accent-dark);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(26px, 6vw, 34px);
+    margin: 0 0 8px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .tagline {
+    color: var(--sub-text);
+    font-size: 15px;
+    margin: 0;
+  }
+  section { margin-top: 40px; }
+  h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 16px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .contact-card .mail-label { font-size: 13px; color: var(--sub-text); }
+  .contact-card .mail-value {
+    font-size: 18px;
+    font-weight: 700;
+    word-break: break-all;
+  }
+  .contact-card a {
+    color: var(--accent-dark);
+  }
+  .contact-card .hours { font-size: 13px; color: var(--sub-text); }
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    background: var(--card-bg);
+  }
+  .faq-item:last-child { margin-bottom: 0; }
+  .faq-item .q {
+    font-weight: 700;
+    font-size: 15px;
+    margin: 0 0 6px;
+    display: flex;
+    gap: 8px;
+  }
+  .faq-item .q::before {
+    content: "Q";
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .faq-item .a {
+    font-size: 14px;
+    color: var(--sub-text);
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    gap: 8px;
+  }
+  .faq-item .a::before {
+    content: "A";
+    color: var(--sub-text);
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+  .faq-item .a-text { flex: 1; }
+  ul.checklist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul.checklist li {
+    padding: 10px 0 10px 28px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    position: relative;
+  }
+  ul.checklist li:last-child { border-bottom: none; }
+  ul.checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  ul.checklist strong { display: inline-block; margin-right: 4px; }
+  .note {
+    font-size: 13px;
+    color: var(--sub-text);
+    margin-top: 14px;
+  }
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--sub-text);
+    text-align: center;
+  }
+  footer nav {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  footer nav a {
+    color: var(--accent-dark);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <span class="badge">サポート</span>
+    <h1>ズボラ家計簿 サポート</h1>
+    <p class="tagline">お問い合わせ先、よくある質問、不具合報告の方法をご案内します。</p>
+  </header>
+
+  <section>
+    <h2>お問い合わせ先</h2>
+    <div class="card contact-card">
+      <span class="mail-label">メールアドレス</span>
+      <a class="mail-value" href="mailto:taikipapa1019@yahoo.co.jp">taikipapa1019@yahoo.co.jp</a>
+      <span class="hours">ご返信までにお時間をいただく場合があります。あらかじめご了承ください。</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>よくある質問</h2>
+
+    <div class="faq-item">
+      <p class="q">アプリは無料ですか？</p>
+      <p class="a"><span class="a-text">はい、無料でご利用いただけます。運営維持のため、アプリ内に広告を表示しています。</span></p>
+    </div>
+
+    <div class="faq-item">
+      <p class="q">ログインやアカウント登録は必要ですか？</p>
+      <p class="a"><span class="a-text">必要ありません。ログイン機能はなく、すぐにご利用いただけます。</span></p>
+    </div>
+
+    <div class="faq-item">
+      <p class="q">入力したデータはどこに保存されますか？</p>
+      <p class="a"><span class="a-text">データはすべて端末内に保存されます。クラウドへの同期や外部サーバーへの送信は行いません。</span></p>
+    </div>
+
+    <div class="faq-item">
+      <p class="q">機種変更やアプリの再インストールをすると、データはどうなりますか？</p>
+      <p class="a"><span class="a-text">データは端末内保存のため、機種変更やアプリの削除・再インストールを行うと引き継がれません。事前のバックアップ機能は現在ご用意していません。</span></p>
+    </div>
+
+    <div class="faq-item">
+      <p class="q">財布はいくつ作成できますか？また並び替えはできますか？</p>
+      <p class="a"><span class="a-text">生活費・食費・おこづかい・旅行・貯金など、目的別に複数の財布を作成できます。財布管理画面から並び替えも可能です。</span></p>
+    </div>
+
+    <div class="faq-item">
+      <p class="q">入力を間違えた場合は修正できますか？</p>
+      <p class="a"><span class="a-text">履歴一覧から該当の記録を開き、金額・種別（入れる／出す）・日付・時刻を編集または削除できます。変更内容は残高や集計に即時反映されます。</span></p>
+    </div>
+
+    <div class="faq-item">
+      <p class="q">メモやカテゴリー、レシート画像は登録できますか？</p>
+      <p class="a"><span class="a-text">本アプリは入力の手軽さを重視しているため、メモ・カテゴリー・店名・支払い方法・レシート画像の登録には対応していません。</span></p>
+    </div>
+
+    <div class="faq-item">
+      <p class="q">広告が表示されるのはなぜですか？</p>
+      <p class="a"><span class="a-text">Google AdMob による広告を表示し、アプリの運営費用に充てています。詳細は<a href="../privacy/">プライバシーポリシー</a>をご確認ください。</span></p>
+    </div>
+
+  </section>
+
+  <section>
+    <h2>不具合を報告する際にお送りいただきたい情報</h2>
+    <div class="card">
+      <ul class="checklist">
+        <li><strong>端末機種：</strong>例）iPhone 15 / Pixel 8 など</li>
+        <li><strong>OSバージョン：</strong>例）iOS 18.1 / Android 15</li>
+        <li><strong>アプリのバージョン：</strong>設定または App Store / Google Play の情報からご確認ください</li>
+        <li><strong>発生した操作の手順：</strong>どの画面で、何を操作した際に発生したか</li>
+        <li><strong>発生状況：</strong>毎回発生するか、まれに発生するか</li>
+        <li><strong>期待していた動作と、実際の動作の違い</strong></li>
+        <li><strong>可能であればスクリーンショット</strong></li>
+      </ul>
+      <p class="note">上記の情報を上記メールアドレス宛にお送りいただけますと、調査がスムーズに進みます。</p>
+    </div>
+  </section>
+
+  <footer>
+    <nav>
+      <a href="../">ホーム</a>
+      <a href="./">サポート</a>
+      <a href="../privacy/">プライバシーポリシー</a>
+    </nav>
+    <p>ズボラ家計簿</p>
+  </footer>
+
+</div>
+</body>
+</html>
